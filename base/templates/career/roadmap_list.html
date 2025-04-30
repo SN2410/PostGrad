@@ -1,0 +1,50 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+
+  <h2 style="color: #f63366; font-size: 1.75rem; font-weight: 700; margin-bottom: 20px;">
+    Your Career Roadmaps
+  </h2>
+
+  <div style="text-align: center; margin-bottom: 30px;">
+    <a href="{% url 'create-roadmap' %}" style="
+        display: inline-block;
+        background-color: #ffffff;
+        color: #f63366;
+        border: 2px solid #f63366;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;">
+        + New Roadmap
+    </a>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    {% for roadmap in roadmaps %}
+      <div style="
+          background: #fff;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+
+        <h3 style="margin: 0;">
+          <a href="{% url 'roadmap-detail' roadmap.pk %}" style="color: #f63366; font-weight: 700; font-size: 1.2rem; text-decoration: none;">
+            {{ roadmap.title }}
+          </a>
+        </h3>
+
+        <p style="margin: 6px 0 0 0; color: #444; font-weight: 600;">
+          {{ roadmap.goal|truncatewords:15 }}
+        </p>
+      </div>
+    {% empty %}
+      <p style="text-align: center; color: #777;">No roadmaps yet. Start one!</p>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}

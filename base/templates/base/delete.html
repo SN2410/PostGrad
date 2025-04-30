@@ -1,0 +1,11 @@
+{% extends 'base/main.html' %}
+{% block content %}
+<div class="layout__box delete-confirm">
+  <h2>Are you sure you want to delete "{{ obj }}"?</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn--dark">Cancel</a>
+    <button type="submit" class="btn btn--main">Confirm</button>
+  </form>
+</div>
+{% endblock %}

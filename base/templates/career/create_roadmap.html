@@ -1,0 +1,70 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<style>
+  body {
+    background: linear-gradient(to right, #ff6a00, #ee0979);
+  }
+
+  .form-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-width: 450px;
+    width: 100%;
+    margin: auto;
+    margin-top: 60px;
+  }
+
+  .form-card h2 {
+    color: #f63366;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+
+  .form-card input,
+  .form-card textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .form-card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f63366;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .form-card button:hover {
+    background-color: #e02050;
+  }
+</style>
+
+<div class="form-card">
+  <h2>Create Career Roadmap</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.title.label_tag }}
+    {{ form.title }}
+
+    {{ form.goal.label_tag }}
+    {{ form.goal }}
+
+    <button type="submit">Create Roadmap</button>
+  </form>
+</div>
+
+{% endblock %}

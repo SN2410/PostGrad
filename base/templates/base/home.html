@@ -1,0 +1,61 @@
+{% include 'base/navbar.html' %}
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PostGrad Pathways</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+
+  <section class="hero">
+    <h1>Your Future Starts Here</h1>
+    <p>Explore your options beyond graduation – jobs, research, grad school, and more!</p>
+    <button onclick="scrollToSection('features')">Get Started</button>
+  </section>
+
+  <section id="about" class="section">
+    <h2>Why PostGrad Pathways?</h2>
+    <p>We guide students in discovering and preparing for life after college. Whether you're job hunting, applying to grad school, or exploring research, we’ve got you covered.</p>
+  </section>
+
+  <section id="features" class="section features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <div class="card">
+        <h3>Career Roadmaps</h3>
+        <p>Step-by-step plans to land your dream job or internship.</p>
+      </div>
+      <div class="card">
+        <h3>Graduate School Support</h3>
+        <p>Application guidance, SOP reviews, and school matches.</p>
+      </div>
+      <div class="card">
+        <h3>Mentor Network</h3>
+        <p>Connect with alumni and professionals in your field.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="section testimonials">
+    <h2>What Students Say</h2>
+    <div class="testimonial">
+      <p>"This platform helped me land my first job after graduation!"</p>
+      <strong>- Maya, Computer Science Graduate</strong>
+    </div>
+    <div class="testimonial">
+      <p>"Thanks to the mentorship and tools, I got into my top-choice grad school."</p>
+      <strong>- Alex, Psychology Major</strong>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <p>&copy; 2025 PostGrad Pathways. All rights reserved.</p>
+    <p>Contact us at <a href="mailto:support@postgradpathways.com">support@postgradpathways.com</a></p>
+  </footer>
+</body>
+</html>

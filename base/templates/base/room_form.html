@@ -1,0 +1,18 @@
+{% extends 'base/main.html' %}
+{% block content %}
+<main class="auth layout">
+  <div class="layout__box room-form">
+    <div class="layout__boxHeader">
+      <div class="layout__boxTitle">
+        <h2>Start a Discussion</h2>
+      </div>
+    </div>
+
+    <form method="POST" class="form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn--main">Create Room</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

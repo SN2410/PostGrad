@@ -1,0 +1,56 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+<div class="layout__box room-form">
+  <h2 class="form-title">Create a New Discussion Room</h2>
+
+  <form method="POST" class="form">
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div class="form__group">
+      <label>{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}
+      <div class="form__error">{{ field.errors|striptags }}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <a href="{% url 'create-room' %}" class="btn btn--main start-discussion-btn">
+            <span class="plus-icon">➕</span>
+            <span>Start a Discussion</span>
+        </a>
+      </div>
+      
+  </form>
+</div>
+
+{% if rooms %}
+  <div class="layout__box" style="margin-top: 2rem;">
+    <h2>Recently Created Rooms</h2>
+    {% for room in rooms %}
+    <div class="roomListRoom">
+      <div class="roomListRoom__header">
+        <a href="{% url 'user-profile' room.host.id %}" class="roomListRoom__author">
+          <div class="avatar avatar--small">
+            <img src="{{ room.host.avatar.url }}" />
+          </div>
+          <span>@{{ room.host.username }}</span>
+        </a>
+        <div class="roomListRoom__actions">
+          <span>{{ room.created|timesince }} ago</span>
+        </div>
+      </div>
+      <div class="roomListRoom__content">
+        <a href="{% url 'room' room.id %}">{{ room.name }}</a>
+      </div>
+      <div class="roomListRoom__meta">
+        <p class="roomListRoom__topic">{{ room.topic.name }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

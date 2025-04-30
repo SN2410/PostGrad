@@ -1,0 +1,27 @@
+{% extends 'base/main.html' %}
+{% block content %}
+<div class="layout__box profile">
+  <div class="profile__header">
+    <div class="avatar avatar--large">
+      <img src="{{ user.avatar.url }}" />
+    </div>
+    <div class="profile__details">
+      <h2>{{ user.name|default:user.username }}</h2>
+      <p>{{ user.email }}</p>
+      <p>{{ user.bio }}</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="profile__rooms">
+    <h3>Created Rooms</h3>
+    {% for room in rooms %}
+      <div class="roomListRoom">
+        <a href="{% url 'room' room.id %}">{{ room.name }}</a>
+        <p class="roomListRoom__topic">{{ room.topic.name }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

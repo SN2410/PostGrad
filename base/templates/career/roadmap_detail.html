@@ -1,0 +1,180 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+
+  <!-- Roadmap Info Card -->
+  <div style="
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+  ">
+    <h2 style="color: #f63366; font-size: 1.75rem; font-weight: 700; margin-bottom: 8px;">
+      {{ roadmap.title }}
+    </h2>
+
+    <p style="font-size: 1rem; margin-bottom: 20px;">
+      <span style="color: #f63366; font-weight: 600;">Goal:</span>
+      <span style="color: #444; font-weight: 600;">{{ roadmap.goal }}</span>
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+      <a href="{% url 'add-milestone' roadmap.id %}" style="
+          background-color: #ffffff;
+          color: #f63366;
+          border: 2px solid #f63366;
+          border-radius: 8px;
+          padding: 8px 16px;
+          font-weight: 600;
+          text-decoration: none;">
+          + Add Milestone
+      </a>
+
+      <a href="{% url 'delete-roadmap' roadmap.id %}" style="
+          background-color: #ffffff;
+          color: #f63366;
+          border: 2px solid #f63366;
+          border-radius: 8px;
+          padding: 8px 16px;
+          font-weight: 600;
+          text-decoration: none;">
+          Delete Roadmap
+      </a>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  {% if total > 0 %}
+    <div style="margin-bottom: 30px;">
+      <p style="font-weight: 600; margin-bottom: 8px;">
+        {{ completed }} of {{ total }} milestones complete
+      </p>
+      <div style="background-color: #eee; height: 16px; border-radius: 8px; overflow: hidden;">
+        <div style="width: {{ percent }}%; background-color: #f63366; height: 100%; transition: width 0.3s;"></div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Celebration Message -->
+  {% if show_congrats %}
+    <div style="
+      background-color: #f0f8ff;
+      border: 2px solid #f63366;
+      color: #f63366;
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 30px;
+      font-size: 1.1rem;">
+      🎉 Congratulations! You’ve completed all your milestones!
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      });
+    </script>
+  {% endif %}
+
+  <!-- Milestones -->
+  <h3 style="margin-top: 40px;">Milestones</h3>
+
+  {% if milestones %}
+  <style>
+    .timeline {
+      display: flex;
+      overflow-x: auto;
+      padding: 20px 0;
+      gap: 40px;
+      justify-content: center;
+    }
+    .timeline-step {
+      flex: 0 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 20px;
+      min-width: 200px;
+      text-align: center;
+      position: relative;
+    }
+    .timeline-step::before {
+      content: attr(data-order);
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f63366;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      font-weight: bold;
+      border-radius: 50%;
+      font-size: 0.9rem;
+    }
+    .timeline-title {
+      font-weight: bold;
+      color: #f63366;
+      margin-bottom: 5px;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: #444;
+    }
+    .timeline-actions {
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+    .timeline-actions a {
+      color: #777;
+      margin: 0 4px;
+      text-decoration: underline;
+    }
+  </style>
+
+  <div class="timeline">
+    {% for m in milestones %}
+      <div class="timeline-step" data-order="{{ m.order }}">
+        <div class="timeline-title" style="{% if m.is_complete %}text-decoration: line-through; color: #888;{% endif %}">
+          {{ m.title }}
+        </div>
+        <div class="timeline-desc" style="{% if m.is_complete %}opacity: 0.6;{% endif %}">
+          {{ m.description }}
+        </div>
+        <div class="timeline-actions">
+          <a href="{% url 'edit-milestone' m.pk %}">Edit</a> |
+          <a href="{% url 'delete-milestone' m.pk %}">Delete</a><br>
+          <a href="{% url 'toggle-milestone' m.pk %}" style="
+              display: inline-block;
+              margin-top: 10px;
+              background-color: {% if m.is_complete %}#cccccc{% else %}#f63366{% endif %};
+              color: white;
+              padding: 6px 12px;
+              border: none;
+              border-radius: 6px;
+              font-weight: 600;
+              text-decoration: none;
+              font-size: 0.85rem;">
+              {% if m.is_complete %}Mark Incomplete{% else %}Mark Complete{% endif %}
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% else %}
+    <p>No milestones added yet.</p>
+  {% endif %}
+
+</div>
+{% endblock %}

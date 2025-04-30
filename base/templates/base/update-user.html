@@ -1,0 +1,10 @@
+{% extends 'base/main.html' %}
+{% block content %}
+<div class="layout__box update-user">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn--main">Update</button>
+  </form>
+</div>
+{% endblock %}

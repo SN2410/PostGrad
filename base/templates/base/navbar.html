@@ -1,0 +1,42 @@
+{% load static %} 
+<header id="navbar">
+  <div class="logo">PostGrad Pathways</div>
+  <nav>
+    <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'rooms' %}">Discussions</a></li>
+      <li><a href="{% url 'create-room' %}">Start a Discussion</a></li>
+      <li><a href="{% url 'jobs' %}">Jobs</a></li>
+      <li><a href="{% url 'career-roadmap-list' %}">Career Roadmaps</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="header__userContainer">
+    {% if request.user.is_authenticated %}
+      <div class="header__user" onclick="toggleDropdown()">
+        <div class="avatar avatar--medium active">
+          <img src="{{ request.user.avatar.url }}" />
+        </div>
+        <div class="header__userinfo">
+          <p>{{ request.user.name|default:request.user.username }}</p>
+          <p class="header__email">{{ request.user.email }}</p>
+        </div>
+        <button class="dropdown-button" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="{% url 'update-user' %}" class="dropdown-link">Settings</a>
+        <a href="{% url 'logout' %}" class="dropdown-link">Logout</a>
+      </div>
+    {% else %}
+      <a href="{% url 'login' %}" class="login-button">
+        <p>Login</p>
+      </a>
+    {% endif %}
+  </div>
+</header>
