@@ -230,7 +230,77 @@ def activityPage(request):
     return render(request, 'base/activity.html', {'room_messages': room_messages}) 
 
 def jobsPage(request):
+<<<<<<< HEAD
     return render(request, 'jobs.html')
+=======
+    jobs = [
+        {
+            "title": "Software Engineer Intern",
+            "description": "Work with our backend team to build scalable APIs and maintain services.",
+            "requirements": [
+                "Proficient in Python and Django",
+                "Familiar with Git/GitHub",
+                "Understanding of REST APIs"
+            ]
+        },
+        {
+            "title": "Business Analyst Intern",
+            "description": "Analyze market trends and customer behavior for product strategy.",
+            "requirements": [
+                "Strong Excel & SQL skills",
+                "Good presentation skills",
+                "Basic knowledge of business analytics"
+            ]
+        },
+        {
+            "title": "Frontend Developer",
+            "description": "Create interactive user interfaces using modern JS frameworks.",
+            "requirements": [
+                "Proficient in HTML, CSS, JavaScript",
+                "React or Vue experience",
+                "Responsive design knowledge"
+            ]
+        },
+        {
+            "title": "Marketing Associate",
+            "description": "Develop and manage marketing strategies for digital campaigns.",
+            "requirements": [
+                "SEO & SEM skills",
+                "Excellent written communication",
+                "Experience with Google Analytics"
+            ]
+        },
+        {
+            "title": "Data Scientist Intern",
+            "description": "Help build machine learning models and run experiments.",
+            "requirements": [
+                "Python, NumPy, Pandas",
+                "Basic ML knowledge",
+                "Data storytelling skills"
+            ]
+        },
+        {
+            "title": "Finance Assistant",
+            "description": "Assist with budgeting and forecasting tasks within the finance team.",
+            "requirements": [
+                "Understanding of accounting principles",
+                "Excel & QuickBooks experience",
+                "Strong attention to detail"
+            ]
+        },
+        {
+            "title": "Product Manager Intern",
+            "description": "Collaborate with cross-functional teams to define features.",
+            "requirements": [
+                "Agile/Scrum familiarity",
+                "Customer empathy",
+                "Clear documentation habits"
+            ]
+        },
+    ]
+    return render(request, 'base/jobs.html', {'jobs': jobs})
+
+>>>>>>> 6d65a7b (Final commit: updated jobs.html, views.py, and styling)
 
 def workshopPage(request):
     return render(request, 'workshop.html')
